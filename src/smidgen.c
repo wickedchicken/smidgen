@@ -121,6 +121,7 @@ int main(int argc, char*argv[]){
   fn = argv[1];
 
 	signal(SIGINT, control_c);
+	signal(SIGCHLD, SIG_IGN);
 
 	g_fd = inotify_init();
 	if (g_fd < 0) {
