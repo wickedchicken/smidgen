@@ -54,10 +54,10 @@ void control_mouse(int enable){
   if(0 == pID){
     int ret = execl("/usr/bin/xinput", "/usr/bin/xinput", "set-int-prop", "12", "Device Enabled", "8", flag, (char *) 0);
     if (-1 == ret){
-      perror("error executing xinit!");
+      perror("error executing xinput!");
     }
   } else if(pID < 0){
-    perror("error forking to xinit!!!");
+    perror("error forking to xinput!!!");
   }
 }
 
@@ -121,6 +121,7 @@ int main(int argc, char*argv[]){
   fn = argv[1];
 
 	signal(SIGINT, control_c);
+	signal(SIGCHLD, SIG_IGN);
 
 	g_fd = inotify_init();
 	if (g_fd < 0) {
